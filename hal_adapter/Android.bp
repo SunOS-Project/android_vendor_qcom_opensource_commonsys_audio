@@ -1,0 +1,68 @@
+aidl_interface {
+    name: "qti-audio-types-aidl",
+    stability: "vintf",
+    owner: "qcom",
+    system_ext_specific: true,
+    host_supported: true,
+    vendor_available: true,
+    double_loadable: true,
+    local_include_dir: "aidl",
+    srcs: [
+        "aidl/qti/audio/core/VString.aidl",
+    ],
+    backend: {
+        // The C++ backend is disabled transitively due to use of FMQ by the audio core HAL.
+        cpp: {
+            enabled: false,
+        },
+        java: {
+            sdk_version: "module_current",
+        },
+    },
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+
+    ],
+    frozen: true,
+}
+
+cc_library {
+    name: "libaudio_have.qti",
+    system_ext_specific: true,
+    srcs: ["HalAdapterVendorExtension.cpp"],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    header_libs: [
+        "libsystem_headers",
+    ],
+
+    vintf_fragments: [
+        "manifest_HAVE.xml"
+        ],
+
+    shared_libs: [
+        "av-audio-types-aidl-ndk",
+        "android.media.audio.common.types-V2-ndk",
+        "libbinder_ndk",
+        "libbase",
+        "qti-audio-types-aidl-V1-ndk",
+    ],
+
+    sanitize: {
+        cfi: true,
+    },
+
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wthread-safety",
+        "-DBACKEND_NDK",
+    ],
+}
