@@ -252,7 +252,7 @@ HalAdapterVendorExtension::parseBluetoothLeReconfigureOffload(
 static std::shared_ptr<::qti::audio::core::HalAdapterVendorExtension>
     gHalAdapterVendorExtension;
 
-extern "C" __attribute__((visibility("default"))) void registerIHAVE() {
+extern "C" __attribute__((visibility("default"))) void registerInterface() {
     gHalAdapterVendorExtension = ndk::SharedRefBase::make<
         ::qti::audio::core::HalAdapterVendorExtension>();
     const auto kServiceName =

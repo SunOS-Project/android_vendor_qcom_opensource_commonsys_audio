@@ -3,20 +3,17 @@ aidl_interface {
     stability: "vintf",
     owner: "qcom",
     system_ext_specific: true,
-    host_supported: true,
     vendor_available: true,
-    double_loadable: true,
     local_include_dir: "aidl",
     srcs: [
         "aidl/qti/audio/core/VString.aidl",
     ],
     backend: {
-        // The C++ backend is disabled transitively due to use of FMQ by the audio core HAL.
         cpp: {
             enabled: false,
         },
         java: {
-            sdk_version: "module_current",
+            enabled: false,
         },
     },
     versions_with_info: [
@@ -30,7 +27,7 @@ aidl_interface {
 }
 
 cc_library {
-    name: "libaudio_have.qti",
+    name: "libaudiohalvendorextn",
     system_ext_specific: true,
     srcs: ["HalAdapterVendorExtension.cpp"],
 
@@ -53,10 +50,6 @@ cc_library {
         "libbase",
         "qti-audio-types-aidl-V1-ndk",
     ],
-
-    sanitize: {
-        cfi: true,
-    },
 
     cflags: [
         "-Wall",

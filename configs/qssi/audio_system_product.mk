@@ -25,11 +25,10 @@ MM_AUDIO += mixerops_benchmark
 MM_AUDIO += resampler_tests
 
 # AIDL AHAL VENDOR EXTENSION
-MM_AUDIO += libaudio_have.qti
+MM_AUDIO += libaudiohalvendorextn
 
 MM_AUDIO_DBG := MhaPlayerDemoApp
 MM_AUDIO_DBG += MhaRecorderDemoApp
 
 PRODUCT_PACKAGES += $(MM_AUDIO)
 PRODUCT_PACKAGES_DEBUG += $(MM_AUDIO_DBG)
-
