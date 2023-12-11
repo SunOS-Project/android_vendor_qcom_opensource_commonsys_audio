@@ -43,9 +43,12 @@ cc_library {
         "manifest_HAVE.xml"
         ],
 
+    defaults: [
+    "latest_android_media_audio_common_types_ndk_shared",
+    ],
+
     shared_libs: [
         "av-audio-types-aidl-ndk",
-        "android.media.audio.common.types-V2-ndk",
         "libbinder_ndk",
         "libbase",
         "qti-audio-types-aidl-V1-ndk",
