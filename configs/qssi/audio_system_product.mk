@@ -1,7 +1,6 @@
 MM_AUDIO := libaudiohal
 MM_AUDIO += audiosphere
 MM_AUDIO += audiosphere.xml
-MM_AUDIO += vendor.qti.voiceprint-V1.0-java
 MM_AUDIO += libbinauralrenderer_wrapper.qti
 MM_AUDIO += libhoaeffects_csim
 MM_AUDIO += libhoaeffects.qti
@@ -12,7 +11,6 @@ MM_AUDIO += libvraudio_client.qti
 MM_AUDIO += libvraudio
 MM_AUDIO += libvr_object_engine
 MM_AUDIO += libvr_sam_wrapper
-MM_AUDIO += vendor.qti.voiceprint@1.0
 MM_AUDIO += libaudio-resampler
 MM_AUDIO += libaudioprocessing
 MM_AUDIO += libaudiopolicymanagerdefault
