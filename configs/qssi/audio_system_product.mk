@@ -25,6 +25,9 @@ MM_AUDIO += resampler_tests
 # AIDL AHAL VENDOR EXTENSION
 MM_AUDIO += libaudiohalvendorextn
 
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    ro.audio.ihaladaptervendorextension_enabled=true
+
 MM_AUDIO_DBG := MhaPlayerDemoApp
 MM_AUDIO_DBG += MhaRecorderDemoApp
 
