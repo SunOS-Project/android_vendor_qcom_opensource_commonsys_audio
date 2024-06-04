@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -18,13 +18,6 @@
 #include <numeric>
 
 // no headers below these
-
-// un comment below for verbose logs
-#define AUDIO_HAL_ADAPATER_ENABLE_VERBOSE 1
-
-#ifdef AUDIO_HAL_ADAPATER_ENABLE_VERBOSE
-#define VERBOSE INFO
-#endif
 
 namespace qti::audio::core {
 
