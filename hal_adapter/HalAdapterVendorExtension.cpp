@@ -139,7 +139,7 @@ std::optional<std::string> getStringForVendorParameterAsVString(
               << ": scope:" << ::aidl::android::media::audio::toString(in_scope)
               << ", raw keys:" << in_rawKeys << " ==> VendorParameter Ids:"
               << std::accumulate(_aidl_return->cbegin(), _aidl_return->cend(),
-                                 std::string(""), [](auto& prev, auto& ele) {
+                                 std::string(""), [](auto prev, auto ele) {
                                      return std::move(prev) + " " + ele;
                                  });
 
@@ -175,7 +175,7 @@ std::optional<std::string> getStringForVendorParameterAsVString(
         << " ==> "
         << std::accumulate(
                out_syncParameters->cbegin(), out_syncParameters->cend(),
-               std::string(""), [](auto& prev, auto& ele) {
+               std::string(""), [](auto prev, auto ele) {
                    std::optional<::aidl::qti::audio::core::VString> parcel;
                    ele.ext.getParcelable(&parcel);
                    return std::move(prev) + " {" + ele.id + "," +
@@ -229,7 +229,7 @@ HalAdapterVendorExtension::parseBluetoothLeReconfigureOffload(
               << ", VendorParameters Ids:"
               << std::accumulate(in_parameters.cbegin(), in_parameters.cend(),
                                  std::string(""),
-                                 [](auto& prev, auto& ele) {
+                                 [](auto prev, auto ele) {
                                      return std::move(prev) + " " + ele.id;
                                  })
               << " ==> raw key and values: " << *_aidl_return;
