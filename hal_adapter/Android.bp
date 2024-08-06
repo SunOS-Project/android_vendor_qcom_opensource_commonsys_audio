@@ -39,10 +39,6 @@ cc_library {
         "libsystem_headers",
     ],
 
-    defaults: [
-    "latest_android_media_audio_common_types_ndk_shared",
-    ],
-
     shared_libs: [
         "av-audio-types-aidl-V1-ndk",
         "libbinder_ndk",
