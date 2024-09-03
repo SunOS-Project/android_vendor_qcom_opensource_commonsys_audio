@@ -5,8 +5,6 @@
 
 #define LOG_TAG "QHAVExt"
 
-#include <aidl/android/media/audio/common/Boolean.h>
-#include <aidl/android/media/audio/common/Int.h>
 #include <aidl/qti/audio/core/VString.h>
 #include <android-base/logging.h>
 #include <android/binder_ibinder_platform.h>
@@ -62,36 +60,6 @@ auto getPairsFromVector = [](const std::vector<std::string>& keyValues) {
     return keyValuePairs;
 };
 
-std::optional<::aidl::android::hardware::audio::core::VendorParameter>
-getVendorParameterInt(const std::string& key, const std::string& value) {
-    ::aidl::android::hardware::audio::core::VendorParameter param;
-    param.id = key;
-    ::aidl::android::media::audio::common::Int parcel;
-    parcel.value = strtol(value.c_str(), nullptr, 10);
-    if (param.ext.setParcelable(parcel) != android::OK) {
-        LOG(ERROR) << __func__ << ": failed to set parcel for "
-                   << parcel.descriptor;
-    }
-    return param;
-}
-
-std::optional<::aidl::android::hardware::audio::core::VendorParameter>
-getVendorParameterBool(const std::string& key, const std::string& value) {
-    ::aidl::android::hardware::audio::core::VendorParameter param;
-    param.id = key;
-    ::aidl::android::media::audio::common::Boolean parcel;
-    if (value == "true") {
-        parcel.value = true;
-    } else {
-        parcel.value = false;
-    }
-    if (param.ext.setParcelable(parcel) != android::OK) {
-        LOG(ERROR) << __func__ << ": failed to set parcel for "
-                   << parcel.descriptor;
-    }
-    return param;
-}
-
 ::aidl::android::hardware::audio::core::VendorParameter
 getVendorParameterAsVString(const std::string& key, const std::string& value) {
     ::aidl::android::hardware::audio::core::VendorParameter param;
@@ -103,18 +71,6 @@ getVendorParameterAsVString(const std::string& key, const std::string& value) {
                    << parcel.descriptor;
     }
     return std::move(param);
-}
-
-std::optional<std::string> getStringForVendorParameter(
-    const ::aidl::android::hardware::audio::core::VendorParameter& param) {
-    std::optional<::aidl::android::media::audio::common::Int> parcel;
-    param.ext.getParcelable(&parcel);
-    if (!parcel.has_value()) {
-        LOG(ERROR) << __func__
-                   << " unable to get Int parcelable for key:" << param.id;
-        return std::nullopt;
-    }
-    return param.id + "=" + std::to_string(parcel.value().value);
 }
 
 std::optional<std::string> getStringForVendorParameterAsVString(
@@ -241,6 +197,11 @@ HalAdapterVendorExtension::parseBluetoothLeReconfigureOffload(
 /**
  * in case, if someone want to dlopen this library and
  * register this as AIDL service.
+ *
+ * Also, as per the interface expectation,
+ * one needs to set the system property
+ * 'ro.audio.ihaladaptervendorextension_enabled' to be true
+ *
  **/
 static std::shared_ptr<::qti::audio::core::HalAdapterVendorExtension>
     gHalAdapterVendorExtension;
