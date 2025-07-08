@@ -1,3 +1,28 @@
+soong_config_module_type {
+    name: "audiohal_libs_cc_defaults",
+    module_type: "cc_defaults",
+    config_namespace: "libaudiohalvendorextn",
+    bool_variables: ["HALADAPT_AIDL_ANDROID_VREL2"],
+    properties: ["shared_libs"],
+}
+
+audiohal_libs_cc_defaults {
+    name: "audiohal_libs_defaults",
+    soong_config_variables: {
+        HALADAPT_AIDL_ANDROID_VREL2: {
+            shared_libs: ["av-audio-types-aidl-ndk",],
+            conditions_default: {
+                shared_libs: ["av-audio-types-aidl-V1-ndk",],
+            },
+       },
+    }
+}
+
+cc_defaults {
+      name: "AudiohalDefaults",
+      defaults: ["audiohal_libs_defaults"],
+}
+
 aidl_interface {
     name: "qti-audio-types-aidl",
     stability: "vintf",
@@ -28,6 +53,7 @@ aidl_interface {
 
 cc_library {
     name: "libaudiohalvendorextn",
+    defaults: ["AudiohalDefaults"],
     system_ext_specific: true,
     srcs: ["HalAdapterVendorExtension.cpp"],
 
@@ -40,7 +66,6 @@ cc_library {
     ],
 
     shared_libs: [
-        "av-audio-types-aidl-ndk",
         "libbinder_ndk",
         "libbase",
         "qti-audio-types-aidl-V1-ndk",
