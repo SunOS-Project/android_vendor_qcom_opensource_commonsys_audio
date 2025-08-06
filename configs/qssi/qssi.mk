@@ -96,6 +96,8 @@ PRODUCT_PRODUCT_PROPERTIES += aaudio.mmap_policy=2
 PRODUCT_PRODUCT_PROPERTIES += aaudio.mmap_exclusive_policy=2
 PRODUCT_PRODUCT_PROPERTIES += aaudio.hw_burst_min_usec=2000
 
+
+ifneq ($(PLATFORM_VERSION), 15)
 # for HIDL related packages
 PRODUCT_PACKAGES += \
     android.hardware.audio@4.0 \
@@ -116,7 +118,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.common@6.0 \
     android.hardware.audio.common@6.0-util \
     android.hardware.audio.effect@6.0
-
+endif
 PRODUCT_PACKAGES_ENG += \
     VoicePrintTest \
     VoicePrintDemo
