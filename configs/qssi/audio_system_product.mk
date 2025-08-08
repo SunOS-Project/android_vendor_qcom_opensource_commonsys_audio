@@ -23,6 +23,13 @@ MM_AUDIO += mixerops_benchmark
 MM_AUDIO += resampler_tests
 
 # AIDL AHAL VENDOR EXTENSION
+# Note: Below soong not required in case vcar gets bp1a changes
+# aconfig sets include previous and current value sets
+ifneq (,$(filter aconfig_value_set-platform_build_release-bp1a, $(RELEASE_ACONFIG_VALUE_SETS)))
+    $(call soong_config_set,libaudiohalvendorextn,HALADAPT_AIDL_ANDROID_VREL2,true)
+else
+    $(call soong_config_set,libaudiohalvendorextn,HALADAPT_AIDL_ANDROID_VREL2,false)
+endif
 MM_AUDIO += libaudiohalvendorextn
 
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
